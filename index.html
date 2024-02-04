@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kuesioner Gaya Belajar Siswa</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icon -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body>
+
+<div class="container mt-5">
+  <div class="row justify-content-center align-items-center">
+    <div class="col-md-6 text-center">
+
+      <form id="form_question">
+        <div class="card">
+          <div class="card-header bg-white">
+            <h4>Kuesioner Gaya Belajar Siswa</h4>
+          </div>
+
+          <div class="card-body text-left">
+            <h6 class="text-center mb-4 mt-3">Pertanyaan <span id="current_question">0</span>/<span id="total_questions">0</span></h6>
+
+            <p class="text-center mb-4" id="question"></p>
+
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="option" id="option1" value="a">
+              <label class="form-check-label" for="option1"><span id="label_option1"></span></label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="option" id="option2" value="b">
+              <label class="form-check-label" for="option2"><span id="label_option2"></span></label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="option" id="option3" value="c">
+              <label class="form-check-label" for="option3"><span id="label_option3"></span></label>
+            </div>
+          </div>
+
+          <div class="card-footer bg-white">
+            <button type="button" class="btn btn-outline-primary text-primary bg-white" disabled id="prev"><i class="bi bi-arrow-left"></i></button>
+            <button type="button" class="btn btn-primary" id="next">Berikutnya <i class="bi bi-chevron-right"></i></button>
+            <button type="button" class="btn btn-danger" id="refresh" style="display: none;">Ulangi <i class="bi bi-arrow-counterclockwise"></i></button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+<!-- SweetAlert JS -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+<script>
+  $(document).ready(function(){
+    let r_name = '';
+    let r_grade = '';
+
+    Swal.fire({
+      title: 'Kenalan Yuk!',
+      html:
+        '<p class="my-3">Halo, boleh kasih tau nama dan kelas kamu dulu ya sebelum mengisi kuesioner</p>' + 
+        '<input type="text" class="form-control mb-2 text-capitalize" spellcheck="false" autocomplete="off" id="name" placeholder="Nama Lengkap">' +
+        '<input type="text" class="form-control text-uppercase" spellcheck="false" autocomplete="off" id="grade" placeholder="Kelas">',
+      showCloseButton: false,
+      showCancelButton: false,
+      focusConfirm: false,
+      allowOutsideClick: false,
+      confirmButtonText: 'Kirim',
+      preConfirm: () => {
+        const name = Swal.getPopup().querySelector('#name').value;
+        const grade = Swal.getPopup().querySelector('#grade').value;
+
+        if(!name || !grade || $.trim(name) == '' || $.trim(grade) == ''){
+          return false;
+        }
+        else{
+          Swal.fire({
+            title: 'Salam Kenal!',
+            html: 'Hai ' + name[0].toUpperCase() + name.slice(1) + ' yang duduk di kelas ' + grade.toUpperCase() + ', Salam Kenal!. Kamu udah bisa ngisi kuesioner ya, jawab dengan jujur supaya kami bisa mengetahui gaya belajar yang cocok buat kamu ;)',
+            icon: 'success'
+          });
+        }
+
+        r_name = name;
+        r_grade = grade;
+        return true;
+      }
+    });
+
+    const questions = [
+    {
+      "id": 1,
+      "question": "Jika saya harus belajar cara melakukan sesuatu, saya belajar paling baik ketika saya:",
+      "options": [
+        { "id": 'a', "option": "Menonton seseorang menunjukkan caranya" },
+        { "id": 'b', "option": "Mendengarkan seseorang yang memberi tahu saya caranya" },
+        { "id": 'c', "option": "Mencoba untuk melakukannya sendiri" }
+      ],
+      "answer": null
+    },
+    {
+      "id": 2,
+      "question": "Ketika saya membaca, saya sering menemukan bahwa saya",
+      "options": [
+        { "id": 'a', "option": "Memvisualisasikan apa yang saya baca di mata batin saya" },
+        { "id": 'b', "option": "Membaca dengan keras atau mendengarkan kata-kata di dalam kepala saya" },
+        { "id": 'c', "option": "Gelisah dan mencoba \"merasakan\" isi bacaan" }
+      ],
+      "answer": null
+    },
+    {
+      "id": 3,
+      "question": "Ketika diminta menunjukkan arah, saya:",
+      "options": [
+        { "id": 'a', "option": "Melihat tempat-tempat yang sebenarnya dalam pikiran saya ketika saya mengatakannya atau lebih suka menggambarnya" },
+        { "id": 'b', "option": "Tidak memiliki kesulitan dalam memberi keterangan secara verbal" },
+        { "id": 'c', "option": "Harus menunjuk atau menggerakkan tubuh saya ketika saya memberi tahu" }
+      ],
+      "answer": null
+    },
+    {
+      "id": 4,
+      "question": "Jika saya tidak yakin bagaimana mengeja kata, saya:",
+      "options": [
+        { "id": 'a', "option": "Menuliskan untuk menentukan apakah itu terlihat benar" },
+        { "id": 'b', "option": "Mengeja dengan keras untuk menentukan apakah kedengarannya benar" },
+        { "id": 'c', "option": "Menuliskan untuk menentukan apakah itu terasa benar." }
+      ],
+      "answer": null
+    },
+    {
+      "id": 5,
+      "question": "Ketika saya menulis, saya:",
+      "options": [
+        { "id": 'a', "option": "Peduli betapa rapi dan baik huruf-huruf dan kata-kata saya muncul" },
+        { "id": 'b', "option": "Sering mengucapkan huruf dan kata-kata untuk diri sendiri" },
+        { "id": 'c', "option": "Mendorong kuat pena atau pensil saya dan dapat merasakan aliran kata atau huruf ketika saya membentuknya" }
+      ],
+      "answer": null
+    },
+    {
+      "id": 6,
+      "question": "Jika saya harus mengingat daftar barang, saya akan mengingatnya dengan baik jika saya:",
+      "options": [
+        { "id": 'a', "option": "Menuliskannya" },
+        { "id": 'b', "option": "Mengatakannya berulang untuk diri sendiri" },
+        { "id": 'c', "option": "Memindahkan dan menggunakan jari saya untuk memberi nama setiap item" }
+      ],
+      "answer": null
+    },
+    {
+      "id": 7,
+      "question": "Saya lebih suka guru yang",
+      "options": [
+        { "id": 'a', "option": "Menggunakan papan atau LCD saat mereka mengajar" },
+        { "id": 'b', "option": "Berbicara dengan banyak ekspresi." },
+        { "id": 'c', "option": "Melakukan aktivitas langsung" }
+      ],
+      "answer": null
+    },
+    {
+      "id": 8,
+      "question": "Ketika mencoba berkonsentrasi, saya mengalami kesulitan ketika:",
+      "options": [
+        { "id": 'a', "option": "Ada banyak kekacauan atau gerakan di dalam ruangan" },
+        { "id": 'b', "option": "Ada banyak suara di dalam ruangan" },
+        { "id": 'c', "option": "Saya harus duduk diam untuk waktu yang lama" }
+      ],
+      "answer": null
+    },
+    {
+      "id": 9,
+      "question": "Saat memecahkan masalah, saya:",
+      "options": [
+        { "id": 'a', "option": "Menulis atau menggambar diagram untuk melihatnya" },
+        { "id": 'b', "option": "Berdialog dengan diri sendiri tentang masalah tersebut." },
+        { "id": 'c', "option": "Menggunakan seluruh tubuh saya atau gerakkan benda untuk membantu saya berpikir" }
+      ],
+      "answer": null
+    },
+    {
+      "id": 10,
+      "question": "Ketika diberikan instruksi tertulis tentang bagaimana membangun sesuatu, saya:",
+      "options": [
+        { "id": 'a', "option": "Membaca secara diam-diam dan mencoba memvisualisasikan bagaimana bagian-bagian itu akan cocok satu sama lain" },
+        { "id": 'b', "option": "Membaca dengan keras dan berbicara pada diri sendiri saat saya menyatukan bagianbagiannya" },
+        { "id": 'c', "option": "Mencoba untuk menyatukan bagian-bagian terlebih dahulu dan membacanya nanti"
+      }
+      ],
+      "answer": null
+    },
+    {
+      "id": 11,
+      "question": "Untuk tetap sibuk sambil menunggu, saya:",
+      "options": [
+        { "id": 'a', "option": "Melihat sekeliling, mencermati, atau membaca" },
+        { "id": 'b', "option": "Berbicara atau mendengarkan orang lain" },
+        { "id": 'c', "option": "Berjalan-jalan, memanipulasi benda dengan tangan saya, atau menggerakkan/mengguncangkan kaki saya saat saya duduk" }
+      ],
+      "answer": null
+    },
+    {
+      "id": 12,
+      "question": "Jika saya harus secara verbal menggambarkan sesuatu kepada orang lain, saya akan:",
+      "options": [
+        { "id": 'a', "option": "Menyingkat saja karena saya tidak suka berbicara panjang lebar" },
+        { "id": 'b', "option": "Berbicara secara rinci karena saya suka bicara" },
+        { "id": 'c', "option": "Menggunakan isyarat dan bergerak sambil berbicara" }
+      ],
+      "answer": null
+    },
+    {
+      "id": 13,
+      "question": "Jika seseorang secara lisan menggambarkan sesuatu kepada saya, saya akan:",
+      "options": [
+        { "id": 'a', "option": "Mencoba untuk memvisualisasikan apa yang dikatakannya" },
+        { "id": 'b', "option": "Menikmati mendengarkannya, tetapi ingin menyela dan berbicara sendiri" },
+        { "id": 'c', "option": "Menjadi bosan jika uraiannya terlalu panjang dan terperinci" }
+      ],
+      "answer": null
+    },
+    {
+      "id": 14,
+      "question": "Ketika mencoba mengingat nama, saya ingat:",
+      "options": [
+        { "id": 'a', "option": "Wajah, tetapi lupa nama" },
+        { "id": 'b', "option": "Nama, tetapi lupa wajah" },
+        { "id": 'c', "option": "Situasi saya temui orang tersebut, selain nama atau wajah orang tersebut" }
+      ],
+      "answer": null
+    },
+    
+    ];
+
+    const result = [{
+      "id": '0',
+      "title": "Gaya belajar kamu belum ada yang cocok nih :(",
+      "desc": "Coba lagi dengan mengisi kuesioner dengan jujur ya, jawaban kamu akan menentukan gaya belajar apa yang cocok buat kamu. Yuk klik tombol ulangi untuk mengisi ulang kuesioner ini."
+    }, {
+      "id": 'a',
+      "title": "Kamu memiliki kecenderungan Gaya Belajar Visual",
+      "desc": "Kamu akan mencapai prestasi belajar yang optimal apabila memanfaatkan kemampuan visual kamu. Kamu dapat membuat sendiri peta konsep atau ringkasan materi di kelas."
+    }, {
+      "id": 'b',
+      "title": "Kamu memiliki kecenderungan Gaya Belajar Auditori",
+      "desc": "Kamu yang memiliki kecenderungan gaya belajar auditori akan mencapai prestasi belajar yang optimal apabila kamu mempelajari materi di kelas dengan mendengarkan baik melalui penjelasan langsung dari guru, diskusi dengan guru dan teman kelas, maupun melalui rekaman materi yang sedang dipelajari."
+    }, {
+      "id": "c",
+      "title": "Kamu memiliki kecenderungan Gaya Belajar Kinestetik",
+      "desc": "Kamu dengan gaya belajar kinestetik akan mencapai prestasi belajar secara optimal apabila kamu terlibat langsung secara fisik dalam kegiatan belajar. Kamu dapat mengutak-atik atau memanipulasi materi atau media yang digunakan dalam menjelaskan pelajaran di kelas."
+    }, {
+      "id": "ab",
+      "title": "Kamu memiliki kecenderungan Gaya Belajar Visual Auditori",
+      "desc": "Ada hal tertentu yang kamu akan belajar efektif jika menggunakan gaya belajar visual, dan ada hal lain yang Anda akan belajar efektif jika menggunakan gaya belajar auditori. Bahkan, kadang jika kedua gaya belajar digunakan, akan lebih optimal."
+    }, {
+      "id": "ac",
+      "title": "Kamu memiliki kecenderungan Gaya Belajar Visual Kinestetik",
+      "desc": "Ada hal tertentu yang kamu akan belajar efektif jika menggunakan gaya belajar visual, dan ada hal lain yang Anda akan belajar efektif jika menggunakan gaya belajar kinestetik. Bahkan, kadang jika kedua gaya belajar digunakan, akan lebih optimal."
+    }, {
+      "id": "bc",
+      "title": "Kamu memiliki kecenderungan Gaya Belajar Auditori Kinestetik",
+      "desc": "Ada hal tertentu yang kamu akan belajar efektif jika menggunakan gaya belajar auditori, dan ada hal lain yang Anda akan belajar kinestetik jika menggunakan gaya belajar auditori. Bahkan, kadang jika kedua gaya belajar digunakan, akan lebih optimal."
+    }];
+
+    let current = 1;
+    let length = questions.length;
+
+    function showQuestions(current){
+      for(let i=0; i<length; i++){
+        if(questions[i].id == current){
+          $("#current_question").text(questions[i].id);
+          $("#total_questions").text(questions.length);
+          $("#question").text(questions[i].question);
+
+          $("#label_option1").text(questions[i].options[0].option);
+          $("#label_option2").text(questions[i].options[1].option);
+          $("#label_option3").text(questions[i].options[2].option);
+
+          //console.log(questions[i].answer);
+          if(questions[i].answer == null){
+            $("#form_question").trigger('reset');
+          }
+          else{
+            $('input[value="'+questions[i].answer+'"]').prop('checked', true)
+          }
+        }
+      }
+    }
+
+    showQuestions(current);
+
+    $("#next").click(function(){
+      /* Validation */
+      let formValue = $("#form_question").serialize();
+      if(formValue == '' || formValue == null){
+        Swal.fire({
+          title: 'Jawaban Kosong',
+          html: 'Jawab pertanyaan terlebih dahulu!',
+          icon: 'warning'
+        });
+
+        return false;
+      }
+
+      $.map(questions, function(item) {
+        if (item.id === current) {
+          item.answer = $('input[name="option"]:checked').val();
+        }
+      });
+
+      if(current == length){
+        /* Calculate Answer */
+        let a = 0;
+        let b = 0;
+        let c = 0;
+        let invalid = 0;
+
+        $.map(questions, function(item) {
+          if (item.answer === 'a') {
+            a++;
+          }
+          else if (item.answer === 'b') {
+            b++;
+          }
+          else if (item.answer === 'c') {
+            c++;
+          }
+          else{
+            invalid++;
+          }
+        });
+
+        if(invalid != 0){
+          Swal.fire({
+            title: 'Hasil Invalid',
+            html: 'Periksa kembali jawaban anda, dan coba lagi',
+            icon: 'error'
+          });
+        }
+        else{
+          let biggest = Math.max(a, b, c);
+          console.log(a, b, c);
+          console.log(biggest)
+
+          let index = 0;
+
+          if(a == biggest && b == biggest){
+            index = 4;
+          }
+          else if(a == biggest && c == biggest){
+            index = 5;
+          }
+          else if(b == biggest && c == biggest){
+            index = 6;
+          }
+          else if(a == biggest){
+            index = 1;
+          }
+          else if(b == biggest){
+            index = 2;
+          }
+          else if(c == biggest){
+            index = 3;
+          }
+          else{
+            index = 0;
+          }
+
+          $("h4").text("Hasil Kuesioner");
+          $("h6").text(r_name[0].toUpperCase() + r_name.slice(1) + ', ' + result[index].title);
+          $("p#question").text(result[index].desc);
+          $('.form-check').remove();
+          $('#next, #prev').hide();
+          $('#refresh').show();
+
+          //$(".card.card-body").empty().html("result");
+        }
+      }
+      else{
+        current++;
+        showQuestions(current);
+      }
+
+      buttonCondition(current);
+    });
+
+    $("#prev").click(function(){
+      $.map(questions, function(item) {
+        if (item.id === current) {
+          item.answer = $('input[name="option"]:checked').val();
+        }
+      });
+
+      current--;
+      showQuestions(current);
+      buttonCondition(current);
+    });
+
+    $("#refresh").click(function(){
+      window.location.reload();
+    });
+
+    function buttonCondition(current){
+      if(current == length){
+        $("#next").html("Lihat Hasil");
+      }
+      else{
+        $("#next").html('Berikutnya <i class="bi bi-chevron-right"></i>');
+      }
+
+      if(current == 1){
+        $("#prev").prop("disabled", true);
+      }
+      else{
+        $("#prev").prop("disabled", false);
+      }
+    }
+  });
+</script>
+
+</body>
+</html>
