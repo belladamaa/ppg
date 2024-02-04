@@ -1,2 +1,2 @@
-# ppg
-Media Pembelajaran Menggunakan Teknologi Sebagai Pemenuhan Tugas PPG
+# Kuesioner Untuk Mengetahui Gaya Belajar Siswa
+Media Pembelajaran berupa kuesioner untuk mengetahui gaya belajar siswa menggunakan teknologi sebagai pemenuhan Tugas PPG
