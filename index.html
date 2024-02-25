@@ -1,430 +1,294 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kuesioner Gaya Belajar Siswa</title>
-  <!-- Bootstrap CSS -->
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Bootstrap Icon -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-</head>
-<body>
-
-<div class="container mt-5">
-  <div class="row justify-content-center align-items-center">
-    <div class="col-md-6 text-center">
-
-      <form id="form_question">
-        <div class="card">
-          <div class="card-header bg-white">
-            <h4>Kuesioner Gaya Belajar Siswa</h4>
-          </div>
-
-          <div class="card-body text-left">
-            <h6 class="text-center mb-4 mt-3">Pertanyaan <span id="current_question">0</span>/<span id="total_questions">0</span></h6>
-
-            <p class="text-center mb-4" id="question"></p>
-
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="option" id="option1" value="a">
-              <label class="form-check-label" for="option1"><span id="label_option1"></span></label>
+   <head>
+      <!-- basic -->
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <!-- mobile metas -->
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+      <!-- site metas -->
+      <title>T5-8 Aksi Nyata - Perangkat Web dalam Pembelajaran</title>
+      <meta name="keywords" content="">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <!-- bootstrap css -->
+      <link rel="stylesheet" href="css/bootstrap.min.css">
+      <!-- style css -->
+      <link rel="stylesheet" href="css/style.css">
+      <!-- Responsive-->
+      <link rel="stylesheet" href="css/responsive.css">
+      <!-- fevicon -->
+      <!-- <link rel="icon" href="images/favicon.png" type="image/gif" /> -->
+      <!-- Scrollbar Custom CSS -->
+      <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+      <!-- Tweaks for older IEs-->
+      <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+      <!-- Include PDF.js library -->
+      <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
+   </head>
+   <!-- body -->
+   <body class="main-layout">
+      <!-- loader  -->
+      <!-- <div class="loader_bg">
+         <div class="loader"><img src="images/loading.gif" alt="#" /></div>
+      </div> -->
+      <!-- end loader -->
+      <!-- header -->
+      <header>
+         <!-- header inner -->
+         <div class="header">
+            <div class="container-fluid">
+               <div class="row">
+                  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col logo_section">
+                     <div class="full">
+                        <div class="center-desk">
+                           <div class="logo">
+                              <h1 class="fw-bold text-white">T5-8 Aksi Nyata</h1>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9">
+                     <nav class="navigation navbar navbar-expand-md navbar-dark ">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarsExample04">
+                           <ul class="navbar-nav mr-auto">
+                              <li class="nav-item">
+                                 <a class="nav-link" href="#materi">Materi </a>
+                              </li>
+                              <li class="nav-item">
+                                 <a class="nav-link" href="#konferensi"> Konferensi</a>
+                              </li>
+                              <li class="nav-item">
+                                 <a class="nav-link" href="#diskusi"> Ruang Diskusi</a>
+                              </li>
+                              <li class="nav-item">
+                                 <a class="nav-link" href="#asesmen"> Asesmen</a>
+                              </li>
+                           </ul>
+                        </div>
+                     </nav>
+                  </div>
+               </div>
             </div>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="option" id="option2" value="b">
-              <label class="form-check-label" for="option2"><span id="label_option2"></span></label>
+         </div>
+      </header>
+      <!-- end header inner -->
+      <!-- end header -->
+      <!-- banner -->
+      <section class="banner_main">
+         <div class="container-fluid">
+            <div class="row d_flex">
+               <div class="col-md-7">
+                  <div class="text-bg">
+                     <div class="padding_lert">
+                        <h1>Perangkat Web dalam Pembelajaran</h1>
+                        <a href="asesmen/index.html">Lakukan Asesmen Awal</a>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-5 bah">
+                  <div class="bann_img">
+                     <figure><img src="images/bann_img.png" alt="#"/></figure>
+                  </div>
+               </div>
             </div>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="option" id="option3" value="c">
-              <label class="form-check-label" for="option3"><span id="label_option3"></span></label>
+         </div>
+      </section>
+      <!-- end banner -->
+      <!-- service -->
+      <div id="materi" class="service">
+         <div class="container-fluid">
+            <div class="row d_flex">
+               <div class="col-md-6">
+                  <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                      <div class="carousel-item active">
+                        <img class="d-block w-100" src="images/materi/materi (1).jpg">
+                      </div>
+                      <div class="carousel-item">
+                        <img class="d-block w-100" src="images/materi/materi (2).jpg">
+                      </div>
+                      <div class="carousel-item">
+                        <img class="d-block w-100" src="images/materi/materi (3).jpg">
+                      </div>
+                      <div class="carousel-item">
+                        <img class="d-block w-100" src="images/materi/materi (4).jpg">
+                      </div>
+                      <div class="carousel-item">
+                        <img class="d-block w-100" src="images/materi/materi (5).jpg">
+                      </div>
+                      <div class="carousel-item">
+                        <img class="d-block w-100" src="images/materi/materi (6).jpg">
+                      </div>
+                      <div class="carousel-item">
+                        <img class="d-block w-100" src="images/materi/materi (7).jpg">
+                      </div>
+                      <div class="carousel-item">
+                        <img class="d-block w-100" src="images/materi/materi (8).jpg">
+                      </div>
+                      <div class="carousel-item">
+                        <img class="d-block w-100" src="images/materi/materi (9).jpg">
+                      </div>
+                      <div class="carousel-item">
+                        <img class="d-block w-100" src="images/materi/materi (10).jpg">
+                      </div>
+                      <div class="carousel-item">
+                        <img class="d-block w-100" src="images/materi/materi (11).jpg">
+                      </div>
+                      <div class="carousel-item">
+                        <img class="d-block w-100" src="images/materi/materi (12).jpg">
+                      </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Next</span>
+                    </a>
+                  </div>
+               </div>
+               <div class="col-md-6">
+                  <div class="titlepage">
+                     <h2>Bangun Ruang Sisi Lengkung</h2>
+                     <span>Bangun Ruang Sisi Lengkung adalah bangun ruang yang memiliki sisi lengkung, misalnya Tabung, Kerucut dan Bola. Adapun bahasan kita kali ini mengenai Tabung, lebih lengkapnya  bisa kamu baca di slide ya! Kamu juga bisa unduh materi mengenai Tabung dengan klik tombol "Unduh Materi".</span>
+                     <a class="read_more" download="tabung.pdf" href="pdf/tabung.pdf" target="_blank">Unduh Materi</a>
+                  </div>
+               </div>
             </div>
-          </div>
+         </div>
+      </div>
+      <!-- end service -->
+      <!-- solutions -->
+      <div id="konferensi" class="solutions">
+         <div class="container">
+            <div class="row d_flex">
+               <div class="col-md-7">
+                  <div class="titlepage">
+                     <h2>Konferensi Kelas</h2>
+                     <span>Untuk membahas lebih lengkap dan detail mengenai Materi Tabung kita bisa lakukan melalui Konferensi Virtual menggunakan Google Meet. Kalian bisa klik tombol 'Mulai Konferensi' untuk mengunjungi Ruang Konferensi Kelas.</span>
+                     <a class="read_more" href="https://meet.google.com/uvv-dxvr-ocr" target="_blank">Mulai Konferensi</a>
+                  </div>
+               </div>
+               <div class="col-md-5">
+                  <div class="solutions_img">
+                     <figure><img src="images/konferensi.jpg" alt="#"/></figure>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- end solutions -->
+      <!-- work -->
+      <div id="diskusi" class="work">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="titlepage">
+                     <h2>Ruang Diskusi</h2>
+                     <span>Setelah kalian mendapatkan materi dari guru, silahkan melakukan diskusi dalam Ruang Diskusi yang telah disediakan berikut ini. <br/>Silahkan masukkan Nama Lengkap dan Komentar kalian didalamnya ya!</span>
+                  </div>
+               </div>
+            </div>
+            <div class="row align-items-center text-center" align="center">
+               <div class="" style="width: 100%; max-width: 500px; margin: 0 auto;">
+                  <div id="comment_wrapper"></div>
 
-          <div class="card-footer bg-white">
-            <button type="button" class="btn btn-outline-primary text-primary bg-white" disabled id="prev"><i class="bi bi-arrow-left"></i></button>
-            <button type="button" class="btn btn-primary" id="next">Berikutnya <i class="bi bi-chevron-right"></i></button>
-            <button type="button" class="btn btn-danger" id="refresh" style="display: none;">Ulangi <i class="bi bi-arrow-counterclockwise"></i></button>
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
+                  <hr/>
 
-<!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
-<!-- SweetAlert JS -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+                  <input type="text" class="form-control mb-3" autocomplete="off" name="name" id="name" placeholder="Nama Lengkap" />
+                  <textarea id="comment" spellcheck="false" class="form-control mb-3" name="comment" rows="5" placeholder="Komentar"></textarea>
 
-<script>
-  $(document).ready(function(){
-    let r_name = '';
-    let r_grade = '';
+                  <button class="read_more" onclick="sendComment()">Kirim</button>
 
-    Swal.fire({
-      title: 'Kenalan Yuk!',
-      html:
-        '<p class="my-3">Halo, boleh kasih tau nama dan kelas kamu dulu ya sebelum mengisi kuesioner</p>' + 
-        '<input type="text" class="form-control mb-2 text-capitalize" spellcheck="false" autocomplete="off" id="name" placeholder="Nama Lengkap">' +
-        '<input type="text" class="form-control text-uppercase" spellcheck="false" autocomplete="off" id="grade" placeholder="Kelas">',
-      showCloseButton: false,
-      showCancelButton: false,
-      focusConfirm: false,
-      allowOutsideClick: false,
-      confirmButtonText: 'Kirim',
-      preConfirm: () => {
-        const name = Swal.getPopup().querySelector('#name').value;
-        const grade = Swal.getPopup().querySelector('#grade').value;
 
-        if(!name || !grade || $.trim(name) == '' || $.trim(grade) == ''){
-          return false;
-        }
-        else{
-          Swal.fire({
-            title: 'Salam Kenal!',
-            html: 'Hai ' + name[0].toUpperCase() + name.slice(1) + ' yang duduk di kelas ' + grade.toUpperCase() + ', Salam Kenal!. Kamu udah bisa ngisi kuesioner ya, jawab dengan jujur supaya kami bisa mengetahui gaya belajar yang cocok buat kamu ;)',
-            icon: 'success'
-          });
-        }
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- end work -->
+      <!--  footer -->
+      <footer>
+         <div id="asesmen" class="footer">
+            <div class="container">
+               <div class="row">
+                  <div class="col-md-5">
+                     <div class="multipurpose">
+                        <h3>Asesmen Formatif</h3>
+                        <div class="multipurpose">
+                           <p>Untuk mengenal lebih jauh mengenai Sisi Lengkung Tabung, silahkan diskusikan dan praktikan Lembar Kerja ini secara langsung di kelas bersama dengan teman kelompok</p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-md-7 sm_none">
+                     <div class="contac_detel" style="max-height: 500px; border-radius: 8px; overflow: auto;">
+                        <img src="images/lkpd/LKPD_Tabung_page-0001.jpg">
+                        <img src="images/lkpd/LKPD_Tabung_page-0002.jpg">
+                        <img src="images/lkpd/LKPD_Tabung_page-0003.jpg">
+                        <img src="images/lkpd/LKPD_Tabung_page-0004.jpg">
+                        <img src="images/lkpd/LKPD_Tabung_page-0005.jpg">
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="copyright">
+               <div class="container">
+                  <div class="row">
+                     <div class="col-md-12">
+                        <p>Bella Damayanti - Universitas Sultan Ageng Tirtayasa | PPG Prajabatan Tahun 2024</p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </footer>
+      <!-- end footer -->
+      <!-- Javascript files-->
+      <script src="js/jquery.min.js"></script>
 
-        r_name = name;
-        r_grade = grade;
-        return true;
-      }
-    });
+      <script src="js/bootstrap.bundle.min.js"></script>
+      <script src="js/jquery-3.0.0.min.js"></script>
+      <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+      <!-- <script src="js/custom.js"></script> -->
 
-    const questions = [
-    {
-      "id": 1,
-      "question": "Jika saya harus belajar cara melakukan sesuatu, saya belajar paling baik ketika saya:",
-      "options": [
-        { "id": 'a', "option": "Menonton seseorang menunjukkan caranya" },
-        { "id": 'b', "option": "Mendengarkan seseorang yang memberi tahu saya caranya" },
-        { "id": 'c', "option": "Mencoba untuk melakukannya sendiri" }
-      ],
-      "answer": null
-    },
-    {
-      "id": 2,
-      "question": "Ketika saya membaca, saya sering menemukan bahwa saya",
-      "options": [
-        { "id": 'a', "option": "Memvisualisasikan apa yang saya baca di mata batin saya" },
-        { "id": 'b', "option": "Membaca dengan keras atau mendengarkan kata-kata di dalam kepala saya" },
-        { "id": 'c', "option": "Gelisah dan mencoba \"merasakan\" isi bacaan" }
-      ],
-      "answer": null
-    },
-    {
-      "id": 3,
-      "question": "Ketika diminta menunjukkan arah, saya:",
-      "options": [
-        { "id": 'a', "option": "Melihat tempat-tempat yang sebenarnya dalam pikiran saya ketika saya mengatakannya atau lebih suka menggambarnya" },
-        { "id": 'b', "option": "Tidak memiliki kesulitan dalam memberi keterangan secara verbal" },
-        { "id": 'c', "option": "Harus menunjuk atau menggerakkan tubuh saya ketika saya memberi tahu" }
-      ],
-      "answer": null
-    },
-    {
-      "id": 4,
-      "question": "Jika saya tidak yakin bagaimana mengeja kata, saya:",
-      "options": [
-        { "id": 'a', "option": "Menuliskan untuk menentukan apakah itu terlihat benar" },
-        { "id": 'b', "option": "Mengeja dengan keras untuk menentukan apakah kedengarannya benar" },
-        { "id": 'c', "option": "Menuliskan untuk menentukan apakah itu terasa benar." }
-      ],
-      "answer": null
-    },
-    {
-      "id": 5,
-      "question": "Ketika saya menulis, saya:",
-      "options": [
-        { "id": 'a', "option": "Peduli betapa rapi dan baik huruf-huruf dan kata-kata saya muncul" },
-        { "id": 'b', "option": "Sering mengucapkan huruf dan kata-kata untuk diri sendiri" },
-        { "id": 'c', "option": "Mendorong kuat pena atau pensil saya dan dapat merasakan aliran kata atau huruf ketika saya membentuknya" }
-      ],
-      "answer": null
-    },
-    {
-      "id": 6,
-      "question": "Jika saya harus mengingat daftar barang, saya akan mengingatnya dengan baik jika saya:",
-      "options": [
-        { "id": 'a', "option": "Menuliskannya" },
-        { "id": 'b', "option": "Mengatakannya berulang untuk diri sendiri" },
-        { "id": 'c', "option": "Memindahkan dan menggunakan jari saya untuk memberi nama setiap item" }
-      ],
-      "answer": null
-    },
-    {
-      "id": 7,
-      "question": "Saya lebih suka guru yang",
-      "options": [
-        { "id": 'a', "option": "Menggunakan papan atau LCD saat mereka mengajar" },
-        { "id": 'b', "option": "Berbicara dengan banyak ekspresi." },
-        { "id": 'c', "option": "Melakukan aktivitas langsung" }
-      ],
-      "answer": null
-    },
-    {
-      "id": 8,
-      "question": "Ketika mencoba berkonsentrasi, saya mengalami kesulitan ketika:",
-      "options": [
-        { "id": 'a', "option": "Ada banyak kekacauan atau gerakan di dalam ruangan" },
-        { "id": 'b', "option": "Ada banyak suara di dalam ruangan" },
-        { "id": 'c', "option": "Saya harus duduk diam untuk waktu yang lama" }
-      ],
-      "answer": null
-    },
-    {
-      "id": 9,
-      "question": "Saat memecahkan masalah, saya:",
-      "options": [
-        { "id": 'a', "option": "Menulis atau menggambar diagram untuk melihatnya" },
-        { "id": 'b', "option": "Berdialog dengan diri sendiri tentang masalah tersebut." },
-        { "id": 'c', "option": "Menggunakan seluruh tubuh saya atau gerakkan benda untuk membantu saya berpikir" }
-      ],
-      "answer": null
-    },
-    {
-      "id": 10,
-      "question": "Ketika diberikan instruksi tertulis tentang bagaimana membangun sesuatu, saya:",
-      "options": [
-        { "id": 'a', "option": "Membaca secara diam-diam dan mencoba memvisualisasikan bagaimana bagian-bagian itu akan cocok satu sama lain" },
-        { "id": 'b', "option": "Membaca dengan keras dan berbicara pada diri sendiri saat saya menyatukan bagianbagiannya" },
-        { "id": 'c', "option": "Mencoba untuk menyatukan bagian-bagian terlebih dahulu dan membacanya nanti"
-      }
-      ],
-      "answer": null
-    },
-    {
-      "id": 11,
-      "question": "Untuk tetap sibuk sambil menunggu, saya:",
-      "options": [
-        { "id": 'a', "option": "Melihat sekeliling, mencermati, atau membaca" },
-        { "id": 'b', "option": "Berbicara atau mendengarkan orang lain" },
-        { "id": 'c', "option": "Berjalan-jalan, memanipulasi benda dengan tangan saya, atau menggerakkan/mengguncangkan kaki saya saat saya duduk" }
-      ],
-      "answer": null
-    },
-    {
-      "id": 12,
-      "question": "Jika saya harus secara verbal menggambarkan sesuatu kepada orang lain, saya akan:",
-      "options": [
-        { "id": 'a', "option": "Menyingkat saja karena saya tidak suka berbicara panjang lebar" },
-        { "id": 'b', "option": "Berbicara secara rinci karena saya suka bicara" },
-        { "id": 'c', "option": "Menggunakan isyarat dan bergerak sambil berbicara" }
-      ],
-      "answer": null
-    },
-    {
-      "id": 13,
-      "question": "Jika seseorang secara lisan menggambarkan sesuatu kepada saya, saya akan:",
-      "options": [
-        { "id": 'a', "option": "Mencoba untuk memvisualisasikan apa yang dikatakannya" },
-        { "id": 'b', "option": "Menikmati mendengarkannya, tetapi ingin menyela dan berbicara sendiri" },
-        { "id": 'c', "option": "Menjadi bosan jika uraiannya terlalu panjang dan terperinci" }
-      ],
-      "answer": null
-    },
-    {
-      "id": 14,
-      "question": "Ketika mencoba mengingat nama, saya ingat:",
-      "options": [
-        { "id": 'a', "option": "Wajah, tetapi lupa nama" },
-        { "id": 'b', "option": "Nama, tetapi lupa wajah" },
-        { "id": 'c', "option": "Situasi saya temui orang tersebut, selain nama atau wajah orang tersebut" }
-      ],
-      "answer": null
-    },
-    
-    ];
+      <script type="text/javascript">
+         function formatDateToIndonesian() {
+             const options = {
+                 year: 'numeric',
+                 month: 'long',
+                 day: 'numeric',
+                 hour: 'numeric',
+                 minute: 'numeric',
+                 hour12: false,
+             };
 
-    const result = [{
-      "id": '0',
-      "title": "Gaya belajar kamu belum ada yang cocok nih :(",
-      "desc": "Coba lagi dengan mengisi kuesioner dengan jujur ya, jawaban kamu akan menentukan gaya belajar apa yang cocok buat kamu. Yuk klik tombol ulangi untuk mengisi ulang kuesioner ini."
-    }, {
-      "id": 'a',
-      "title": "Kamu memiliki kecenderungan Gaya Belajar Visual",
-      "desc": "Kamu akan mencapai prestasi belajar yang optimal apabila memanfaatkan kemampuan visual kamu. Kamu dapat membuat sendiri peta konsep atau ringkasan materi di kelas."
-    }, {
-      "id": 'b',
-      "title": "Kamu memiliki kecenderungan Gaya Belajar Auditori",
-      "desc": "Kamu yang memiliki kecenderungan gaya belajar auditori akan mencapai prestasi belajar yang optimal apabila kamu mempelajari materi di kelas dengan mendengarkan baik melalui penjelasan langsung dari guru, diskusi dengan guru dan teman kelas, maupun melalui rekaman materi yang sedang dipelajari."
-    }, {
-      "id": "c",
-      "title": "Kamu memiliki kecenderungan Gaya Belajar Kinestetik",
-      "desc": "Kamu dengan gaya belajar kinestetik akan mencapai prestasi belajar secara optimal apabila kamu terlibat langsung secara fisik dalam kegiatan belajar. Kamu dapat mengutak-atik atau memanipulasi materi atau media yang digunakan dalam menjelaskan pelajaran di kelas."
-    }, {
-      "id": "ab",
-      "title": "Kamu memiliki kecenderungan Gaya Belajar Visual Auditori",
-      "desc": "Ada hal tertentu yang kamu akan belajar efektif jika menggunakan gaya belajar visual, dan ada hal lain yang Anda akan belajar efektif jika menggunakan gaya belajar auditori. Bahkan, kadang jika kedua gaya belajar digunakan, akan lebih optimal."
-    }, {
-      "id": "ac",
-      "title": "Kamu memiliki kecenderungan Gaya Belajar Visual Kinestetik",
-      "desc": "Ada hal tertentu yang kamu akan belajar efektif jika menggunakan gaya belajar visual, dan ada hal lain yang Anda akan belajar efektif jika menggunakan gaya belajar kinestetik. Bahkan, kadang jika kedua gaya belajar digunakan, akan lebih optimal."
-    }, {
-      "id": "bc",
-      "title": "Kamu memiliki kecenderungan Gaya Belajar Auditori Kinestetik",
-      "desc": "Ada hal tertentu yang kamu akan belajar efektif jika menggunakan gaya belajar auditori, dan ada hal lain yang Anda akan belajar kinestetik jika menggunakan gaya belajar auditori. Bahkan, kadang jika kedua gaya belajar digunakan, akan lebih optimal."
-    }];
+             const formattedDate = new Date().toLocaleDateString('id-ID', options);
+             return formattedDate;
+         }
 
-    let current = 1;
-    let length = questions.length;
+         function sendComment(){
+            let datetime = formatDateToIndonesian();
+            if($.trim($("#name").val()) != '' && $.trim($("#comment").val()) != ''){
+               $("#comment_wrapper").append(`<div class="card mb-3">
+         <div class="card-body text-left mb-0 p-3">
+            <div class="bold">
+               <div style="font-weight: bold; color: black; line-height: 14px;">`+$("#name").val()+`</div>
+               <div style="font-size: smaller;">`+datetime+`</div>
+            </div>
 
-    function showQuestions(current){
-      for(let i=0; i<length; i++){
-        if(questions[i].id == current){
-          $("#current_question").text(questions[i].id);
-          $("#total_questions").text(questions.length);
-          $("#question").text(questions[i].question);
-
-          $("#label_option1").text(questions[i].options[0].option);
-          $("#label_option2").text(questions[i].options[1].option);
-          $("#label_option3").text(questions[i].options[2].option);
-
-          //console.log(questions[i].answer);
-          if(questions[i].answer == null){
-            $("#form_question").trigger('reset');
-          }
-          else{
-            $('input[value="'+questions[i].answer+'"]').prop('checked', true)
-          }
-        }
-      }
-    }
-
-    showQuestions(current);
-
-    $("#next").click(function(){
-      /* Validation */
-      let formValue = $("#form_question").serialize();
-      if(formValue == '' || formValue == null){
-        Swal.fire({
-          title: 'Jawaban Kosong',
-          html: 'Jawab pertanyaan terlebih dahulu!',
-          icon: 'warning'
-        });
-
-        return false;
-      }
-
-      $.map(questions, function(item) {
-        if (item.id === current) {
-          item.answer = $('input[name="option"]:checked').val();
-        }
-      });
-
-      if(current == length){
-        /* Calculate Answer */
-        let a = 0;
-        let b = 0;
-        let c = 0;
-        let invalid = 0;
-
-        $.map(questions, function(item) {
-          if (item.answer === 'a') {
-            a++;
-          }
-          else if (item.answer === 'b') {
-            b++;
-          }
-          else if (item.answer === 'c') {
-            c++;
-          }
-          else{
-            invalid++;
-          }
-        });
-
-        if(invalid != 0){
-          Swal.fire({
-            title: 'Hasil Invalid',
-            html: 'Periksa kembali jawaban anda, dan coba lagi',
-            icon: 'error'
-          });
-        }
-        else{
-          let biggest = Math.max(a, b, c);
-          console.log(a, b, c);
-          console.log(biggest)
-
-          let index = 0;
-
-          if(a == biggest && b == biggest){
-            index = 4;
-          }
-          else if(a == biggest && c == biggest){
-            index = 5;
-          }
-          else if(b == biggest && c == biggest){
-            index = 6;
-          }
-          else if(a == biggest){
-            index = 1;
-          }
-          else if(b == biggest){
-            index = 2;
-          }
-          else if(c == biggest){
-            index = 3;
-          }
-          else{
-            index = 0;
-          }
-
-          $("h4").text("Hasil Kuesioner");
-          $("h6").text(r_name[0].toUpperCase() + r_name.slice(1) + ', ' + result[index].title);
-          $("p#question").text(result[index].desc);
-          $('.form-check').remove();
-          $('#next, #prev').hide();
-          $('#refresh').show();
-
-          //$(".card.card-body").empty().html("result");
-        }
-      }
-      else{
-        current++;
-        showQuestions(current);
-      }
-
-      buttonCondition(current);
-    });
-
-    $("#prev").click(function(){
-      $.map(questions, function(item) {
-        if (item.id === current) {
-          item.answer = $('input[name="option"]:checked').val();
-        }
-      });
-
-      current--;
-      showQuestions(current);
-      buttonCondition(current);
-    });
-
-    $("#refresh").click(function(){
-      window.location.reload();
-    });
-
-    function buttonCondition(current){
-      if(current == length){
-        $("#next").html("Lihat Hasil");
-      }
-      else{
-        $("#next").html('Berikutnya <i class="bi bi-chevron-right"></i>');
-      }
-
-      if(current == 1){
-        $("#prev").prop("disabled", true);
-      }
-      else{
-        $("#prev").prop("disabled", false);
-      }
-    }
-  });
-</script>
-
-</body>
+            <div class="comment" style="color: black;">`+$("#comment").val()+`</div>
+         </div>
+      </div>`);
+               $("#name").val("");
+               $("#comment").val("");
+            }
+         }
+      </script>
+   </body>
 </html>
